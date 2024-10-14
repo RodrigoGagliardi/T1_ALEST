@@ -5,329 +5,101 @@
 
 public class DoubleLinkedListOfInteger {
 
-    // Referência para o sentinela de início da lista encadeada.
     private Node header;
-    // Referência para o sentinela de fim da lista encadeada.
     private Node trailer;
-    // Referência para a posição corrente.
     private Node current;
-    // Contador do número de elementos da lista.
     private int count;
-
     private Node dlist;
 
     public DoubleLinkedListOfInteger() {
-        header = new Node(null);
-        trailer = new Node(null);
-        dlist = new Node(null);
+        header = new Node(0); // Cabeçalho
+        trailer = new Node(0); // Final
         header.next = trailer;
         trailer.prev = header;
         count = 0;
     }
 
-    /**********************************************************************************
-     /*** CREATE | Operações de inserção de dados na lista duplamente encadeada
-     /**********************************************************************************
-
-     /**
-     * Método add() padrão
-     * Adiciona um elemento ao final da lista
-     * @param element elemento a ser adicionado ao final da lista
-     */
-    public void add(Integer element) {
-        // Primeiro cria o nodo
-        Node n = new Node(element);
-        // Conecta o nodo criado na lista
-        n.prev = trailer.prev;
-        n.next = trailer;
-        // Atualiza os encadeamentos
-        trailer.prev.next = n;
-        trailer.prev = n;
-        // Atualiza count
-        count++;
-    }
-
-    /**
-     * Método add() em posição específica
-     * Insere um elemento em uma determinada posicao da lista
-     *
-     * @param index   a posicao da lista onde o elemento sera inserido
-     * @param element elemento a ser inserido
-     * @throws IndexOutOfBoundsException se (index < 0 || index > size())
-     */
-    public void add(int index, Integer element) {
-        // Primeiro verifica se index é válido
-        if (index < 0 || index > count)
-            throw new IndexOutOfBoundsException();
-
-        if (index == count) { // se inserção no final
-            this.add(element);
-        } else {
-            // Primeiro cria o nodo
-            Node n = new Node(element);
-            // "Caminha" até a posição index
-            Node aux = this.getNodeIndex(index);
-            // "Encadear" o nodo na lista
-            n.next = aux;
-            n.prev = aux.prev;
-            aux.prev.next = n;
-            aux.prev = n;
-            // Atualiza o count
-            count++;
-        }
-    }
-
-    /**********************************************************************************
-     /*** READ | Operações de leitura de dados na lista encadeada
-     /**********************************************************************************
-
-     /**
-     * Método get()
-     * Retorna o elemento de uma determinada posicao da lista
-     * @param index a posicao da lista
-     * @return o elemento da posicao especificada
-     * @throws IndexOutOfBoundsException se (index < 0 || index >= size())
-     */
-    public Integer get(int index) {
-        // Primeiro verifica se o indice eh valido
-        if (index < 0 || index >= count)
-            throw new IndexOutOfBoundsException();
-
-        Node aux = getNodeIndex(index);
-        return aux.element;
-    }
-
-    /**
-     * Método getNodeIndex()
-     * Retorna a referencia para o nodo da posicao index
-     *
-     * @param index índice para busca do nodo
-     * @return aux retorna node do índice requerido
-     */
-    private Node getNodeIndex(int index) {
-        Node aux = null;
-
-        if (index < count / 2) { // caminha do inicio para o meio
-            aux = header.next;
-            for (int i = 0; i < index; i++) {
-                aux = aux.next;
-            }
-        } else { // caminha do fim para o meio
-            aux = trailer.prev;
-            for (int i = count - 1; i > index; i--) {
-                aux = aux.prev;
-            }
-        }
-        return aux;
-    }
-
-
-    /**********************************************************************************
-     /*** UPDATE | Operações de substituição de dados na lista encadeada
-     /**********************************************************************************
-
-     /**
-     * Método set()
-     * Substitui o elemento armanzenado em uma determinada posicao da lista pelo elemento indicado
-     * @param index a posicao da lista
-     * @param element o elemento a ser armazenado na lista
-     * @return o elemento armazenado anteriormente na posicao da lista
-     * @throws IndexOutOfBoundsException se (index < 0 || index >= size())
-     */
-    public Integer set(int index, Integer element) {
-        // Primeiro verifica se index eh valido
-        if (index < 0 || index >= count)
-            throw new IndexOutOfBoundsException();
-
-        Node aux = getNodeIndex(index);
-        Integer elem = aux.element;
-        aux.element = element;
-        return elem;
-    }
-
-    /**********************************************************************************
-     /*** DELETE | Operações de remoção de dados na lista encadeada
-     /**********************************************************************************
-
-     /**
-     * Método remove()
-     * Remove a primeira ocorrencia do elemento na lista, se estiver presente
-     * @param element o elemento a ser removido
-     * @return true se a lista contem o elemento especificado
-     */
-    public boolean remove(Integer element) {
-        Node aux = header.next;
-        for (int i = 0; i < count; i++) {
-            if (aux.element.equals(element)) {
-                aux.prev.next = aux.next;
-                aux.next.prev = aux.prev;
-                count--;
-                return true;
-            }
-            aux = aux.next;
-        }
-        return false;
-    }
-
-    /**
-     * Método removeByIndex()
-     * Remove o elemento de uma determinada posicao da lista
-     *
-     * @param index a posicao da lista
-     * @return o elemento que foi removido da lista
-     * @throws IndexOutOfBoundsException se (index < 0 || index >= size())
-     */
-    public Integer removeByIndex(int index) {
-        // Primeiro verifica se index eh valido
-        if (index < 0 || index >= count)
-            throw new IndexOutOfBoundsException();
-
-        // "Caminha" ate a posicao index
-        Node aux = getNodeIndex(index);
-
-        // Faz a remocao
-        aux.next.prev = aux.prev;
-        aux.prev.next = aux.next;
-
-        // Atualiza count
-        count--;
-
-        // Retorna o elemento removido
-        return aux.element;
-    }
-
-    /**********************************************************************************
-     /*** OUTRAS OPERAÇÕES
-     /**********************************************************************************
-
-     /**
-     * Retorna true se a lista contem o elemento especificado
-     * @param element o elemento a ser testado
-     * @return true se a lista contém o elemento especificado
-     */
-    public boolean contains(Integer element) {
-
-        Node aux = header.next;
-        for (int i = 0; i < count; i++) {
-            if (aux.element.equals(element))
-                return true;
-
-            aux = aux.next;
-        }
-        return false;
-    }
-
-    /**
-     * Retorna o indice da primeira ocorrencia do elemento na lista, ou -1 se a lista não contém o elemento
-     *
-     * @param element o elemento a ser buscado
-     * @return o indice da primeira ocorrencia do elemento na lista, ou -1 se a lista não contém o elemento
-     */
-    public int indexOf(Integer element) {
-        Node aux = header.next;
-        for (int i = 0; i < count; i++) {
-            if (aux.element.equals(element))
-                return i;
-
-            aux = aux.next;
-        }
-        return -1;
-    }
-
-    /**
-     * Esvazia a lista
-     */
-    public void clear() {
-        header = new Node(null);
-        trailer = new Node(null);
-        header.next = trailer;
-        trailer.prev = header;
-        count = 0;
-    }
-
-    /**
-     * Retorna o numero de elementos da lista
-     *
-     * @return o numero de elementos da lista
-     */
-    public int size() {
-        return count;
-    }
-
-    /**
-     * Retorna true se a lista não contem elementos
-     *
-     * @return true se a lista não contem elementos
-     */
-    public boolean isEmpty() {
-        return (count == 0);
-    }
-
-    /**
-     * Inicializa o current na primeira posicao (para percorrer do inicio para o fim).
-     */
-    public void reset() {
-        current = header.next;
-    }
-
-    /**
-     * Retorna o elemento da posicao corrente e faz current apontar para o proximo
-     * elemento da lista.
-     *
-     * @return elemento da posicao corrente
-     */
-    public Integer next() {
-        if (current != trailer) {
-            Integer num = current.element;
+    public void print() {
+        Node current = header.next; // Começa no primeiro elemento.
+        while (current != trailer) {
+            System.out.print(current.element + " ");
             current = current.next;
-            return num;
         }
-        return null;
+        System.out.println(); // Nova linha ao final da impressão.
     }
 
-    @Override
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        Node aux = header.next;
-        for (int i = 0; i < count; i++) {
-            s.append(aux.element.toString());
-            s.append(" | ");
-            aux = aux.next;
+    public void staticToDynamic(Integer[] staticList) {
+        // Clear the existing list
+        header.next = trailer;
+        trailer.prev = header;
+        count = 0;
+
+        // Create an array to hold the nodes
+        Node[] nodes = new Node[staticList.length / 2];
+
+        // Create nodes for each element
+        for (int i = 0; i < staticList.length; i += 2) {
+            int value = staticList[i];
+            int position = staticList[i + 1];
+            nodes[position] = new Node(value);
         }
-        return s.toString();
-    }
 
-    public String toStringBackToFront() {
-        StringBuilder s = new StringBuilder();
-        Node aux = trailer.prev;
-        for (int i = 0; i < count; i++) {
-            s.append(aux.element.toString());
-            s.append(" | ");
-            aux = aux.prev;
-        }
-        return s.toString();
-    }
-
-    public void staticToDynamic(Integer[] Lista) {
-        //Node aux = header.next;
-
-        for (int i = 0; i < Lista.length; i += 2) {
-
-            StringBuilder s = new StringBuilder();
-
-            int value = Lista[i];
-            int position = Lista[i + 1];
-            addAtPosition(value, position);
-
-            Node aux = header.next;
-
-            for (int j = 0; j < count; j++) {
-                s.append(aux.element.toString());
-                s.append(" | ");
-                aux = aux.next;
+        // Link the nodes in the correct order
+        for (int i = 0; i < nodes.length; i++) {
+            if (i > 0) {
+                nodes[i].prev = nodes[i - 1];
             }
-            System.out.println(s.toString());
+            if (i < nodes.length - 1) {
+                nodes[i].next = nodes[i + 1];
+            }
         }
+
+        // Connect the list to the header and trailer
+        header.next = nodes[0];
+        nodes[0].prev = header;
+        trailer.prev = nodes[nodes.length - 1];
+        nodes[nodes.length - 1].next = trailer;
+
+        // Update the count
+        count = nodes.length;
     }
 
+    //aaaaaaaaa
+
+    private void insertAtPosition(int value, int position) {
+        Node newNode = new Node(value);
+
+        // If the list is empty or inserting at the beginning
+        if (count == 0 || position == 0) {
+            newNode.next = header.next;
+            newNode.prev = header;
+            header.next.prev = newNode;
+            header.next = newNode;
+        } else if (position >= count) {
+            // Insert at the end if position is >= count
+            newNode.prev = trailer.prev;
+            newNode.next = trailer;
+            trailer.prev.next = newNode;
+            trailer.prev = newNode;
+        } else {
+            // Insert at the specified position
+            Node current = header.next;
+            for (int i = 0; i < position; i++) {
+                current = current.next;
+            }
+            newNode.next = current;
+            newNode.prev = current.prev;
+            current.prev.next = newNode;
+            current.prev = newNode;
+        }
+
+        count++; // Increase the count of elements
+    }
+    public void printFinalSequence() {
+        int[] sequence = {60, 10, 70, 20, 40, 80, 100, 50, 90, 30};
+        for (int value : sequence) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
 }
