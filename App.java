@@ -1,7 +1,6 @@
 public class App {
     public static void main(String[] args) {
-        // Lista de arranjo estática com valores e posições
-        Integer[] staticList = {70, 2, 30, 9, 20, 3, 50, 7, 60, 0, 80, 5, 10, 1, 100, 6, 90, 8, 40, 4};
+ /*       Integer[] staticList = {70, 2, 30, 9, 20, 3, 50, 7, 60, 0, 80, 5, 10, 1, 100, 6, 90, 8, 40, 4};
         DoubleLinkedListOfInteger list2 = new DoubleLinkedListOfInteger();
 
         DoubleLinkedListOfInteger dynamicList = new DoubleLinkedListOfInteger();
@@ -22,8 +21,17 @@ public class App {
         System.out.println("MÉTODO 7: removeLowerThan: menores que 50");
         dynamicList.removeLowerThan(50);
         dynamicList.print();
-        System.out.println("----------------------------------------");
+*/        System.out.println("----------------------------------------");
+        StackOfInteger stack = new StackOfInteger();
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
 
+        System.out.println("Topo da pilha: " + stack.top());
+
+        System.out.println("Elemento removido: " + stack.pop());
+
+        System.out.println("Novo topo da pilha: " + stack.top());
 
     }
 }

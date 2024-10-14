@@ -6,9 +6,9 @@
 public class DoubleLinkedListOfInteger {
 
     private Node header;
-    private Node trailer;
+    Node trailer;
     private Node current;
-    private int count;
+    int count;
     private Node dlist;
 
     public DoubleLinkedListOfInteger() {
