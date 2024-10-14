@@ -17,7 +17,7 @@ Estruturas de Dados Lineares e Complexidade de Algoritmos
 </h2>
 
 <ul>
-  <li>Rodrigo Gagliardi</li>
+  <li>Rodrigo Macuglia Gagliardi de Lima</li>
   <li>Marco Antonio Barp Fernandes de Almeida </li>
 </ul>
 
