@@ -67,37 +67,37 @@ public class DoubleLinkedListOfInteger {
     }
 
     private void insertAtPosition(int value, int position) {
-        Node newNode = new Node(value);
+        Node novoNode = new Node(value);
 
 
         if (count == 0 || position == 0) {
-            newNode.next = header.next;
-            newNode.prev = header;
-            header.next.prev = newNode;
-            header.next = newNode;
+            novoNode.next = header.next;
+            novoNode.prev = header;
+            header.next.prev = novoNode;
+            header.next = novoNode;
 
         } else if (position >= count) {
-            newNode.prev = trailer.prev;
-            newNode.next = trailer;
-            trailer.prev.next = newNode;
-            trailer.prev = newNode;
+            novoNode.prev = trailer.prev;
+            novoNode.next = trailer;
+            trailer.prev.next = novoNode;
+            trailer.prev = novoNode;
 
         } else {
             Node current = header.next;
             for (int i = 0; i < position; i++) {
                 current = current.next;
             }
-            newNode.next = current;
-            newNode.prev = current.prev;
-            current.prev.next = newNode;
-            current.prev = newNode;
+            novoNode.next = current;
+            novoNode.prev = current.prev;
+            current.prev.next = novoNode;
+            current.prev = novoNode;
         }
         count++;
     }
 
     public void printFinalSequence() {
-        int[] sequence = {60, 10, 70, 20, 40, 80, 100, 50, 90, 30};
-        for (int value : sequence) {
+        int[] sequencia = {60, 10, 70, 20, 40, 80, 100, 50, 90, 30};
+        for (int value : sequencia) {
             System.out.print(value + " ");
         }
         System.out.println();
@@ -170,6 +170,31 @@ public class DoubleLinkedListOfInteger {
         current.prev = startNode.prev;
         count -= (stop - start);
     }
+    /**
+     * MÉTODO 7: removeLowerThan
+     *
+     * Remove da lista todos os elementos cujo valor seja menor que o valor especificado.
+     * Este método modifica a lista atual, eliminando os elementos que atendem ao critério.
+     * Limpar da lista todos os valores que não atendem a um critério mínimo.
+     *
+     * @param value valor de referência; elementos menores que este valor serão removidos
+     * @return void
+     */
+    public void removeLowerThan(int value) {
+        Node current = header.next;
+
+        while (current != trailer) {
+            if (current.element < value) {
+                current.prev.next = current.next;
+                current.next.prev = current.prev;
+
+                count--;
+            }
+            current = current.next;
+        }
+    }
+
+
 }
 
 

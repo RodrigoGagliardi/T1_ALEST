@@ -15,10 +15,15 @@ public class App {
         dynamicList.mergeList(list2);
         dynamicList.print();
         System.out.println("-----------------------------------------");
-        System.out.println("MÉTODO 5: removeRange:");
+        System.out.println("MÉTODO 5: removeRange: 2 até 5");
         dynamicList.removeRange(2, 5);
         dynamicList.print();
         System.out.println("-----------------------------------------");
-        
+        System.out.println("MÉTODO 7: removeLowerThan: menores que 50");
+        dynamicList.removeLowerThan(50);
+        dynamicList.print();
+        System.out.println("----------------------------------------");
+
+
     }
 }
