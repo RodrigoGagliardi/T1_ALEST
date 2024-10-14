@@ -5,7 +5,7 @@
 
 public class DoubleLinkedListOfInteger {
 
-    private Node header;
+    Node header;
     Node trailer;
     private Node current;
     int count;
@@ -68,7 +68,6 @@ public class DoubleLinkedListOfInteger {
 
     private void insertAtPosition(int value, int position) {
         Node novoNode = new Node(value);
-
 
         if (count == 0 || position == 0) {
             novoNode.next = header.next;
@@ -194,7 +193,52 @@ public class DoubleLinkedListOfInteger {
         }
     }
 
+    public Integer removeLast() {
+        if (isEmpty()) {
+            return null;
+        }
+        Node lastNode = trailer.prev;
+        lastNode.prev.next = trailer;
+        trailer.prev = lastNode.prev;
+        count--;
+        return lastNode.element;
+    }
 
+    public Integer getLast() {
+        if (isEmpty()) {
+            return null;
+        }
+        return trailer.prev.element;
+    }
+
+    public Integer getFirst() {
+        if (isEmpty()) {
+            return null;
+        }
+        return header.next.element;
+    }
+
+    public Integer removeFirst() {
+        if (isEmpty()) {
+            return null;
+        }
+        Node firstNode = header.next;
+        header.next = firstNode.next;
+        firstNode.next.prev = header;
+        count--;
+        return firstNode.element;
+    }
+
+    public boolean isEmpty() {
+        return count == 0;
+    }
+
+    public int size() {
+        return count;
+    }
 }
+
+
+
 
 

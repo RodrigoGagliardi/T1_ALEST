@@ -4,29 +4,27 @@ public class StackOfInteger {
     public StackOfInteger() {
         this.list = new DoubleLinkedListOfInteger();
     }
+
     public void push(int value) {
         list.add(value);
 
     }
+
     public Integer pop() {
-        if (list.count == 0) {
+        if (list.isEmpty()) {
             return null;
         }
-
-        Integer topValue = list.trailer.prev.element;
-        list.trailer.prev = list.trailer.prev.prev;
-        list.trailer.prev.next = list.trailer;
-
-        list.count--;
-        return topValue;
+        return list.removeLast();
     }
 
     public Integer top() {
-        if (list.count == 0) {
+        if (list.isEmpty()) {
             return null;
         }
-
-        return list.trailer.prev.element;
+        return list.getLast();
     }
 
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
 }
