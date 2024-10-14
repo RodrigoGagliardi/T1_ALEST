@@ -1,6 +1,24 @@
-Algoritmos e Estrutura de Dados | Trabalho T1
+<div style="text-align: center;">
+
+# Algoritmos e Estrutura de Dados | Trabalho T1
+
+</div>
+
+<div style="text-align: center;">
+  
 Estruturas de Dados Lineares e Complexidade de Algoritmos
-Este trabalho tem o objetivo de proporcionar o raciocínio no desenvolvimento de aplicações que adotem estruturas de dados lineares, bem como a análise crítica a respeito da complexidade de algoritmos. O trabalho pode ser feito em duplas ou trios e a entrega deve ser feita pelo Moodle por apenas um integrante de cada equipe.
 
+</div>
 
-👨‍💻 INTEGRANTES DO GRUPO:
+<br>
+
+<h2>
+  👨‍💻 INTEGRANTES DO GRUPO:
+</h2>
+
+<ul>
+  <li>Rodrigo Gagliardi</li>
+  <li>Marco Antonio Barp Fernandes de Almeida </li>
+</ul>
+
+<br>
