@@ -19,6 +19,19 @@ public class DoubleLinkedListOfInteger {
         count = 0;
     }
 
+    public void add(Integer element) {
+        // Primeiro cria o nodo
+        Node n = new Node(element);
+        // Conecta o nodo criado na lista
+        n.prev = trailer.prev;
+        n.next = trailer;
+        // Atualiza os encadeamentos
+        trailer.prev.next = n;
+        trailer.prev = n;
+        // Atualiza count
+        count++;
+    }
+
     public void print() {
         Node current = header.next; // Começa no primeiro elemento.
         while (current != trailer) {
@@ -101,5 +114,30 @@ public class DoubleLinkedListOfInteger {
             System.out.print(value + " ");
         }
         System.out.println();
+    }
+
+    public void mergeList(DoubleLinkedListOfInteger list2) {
+
+        list2.add(70);
+        list2.add(30);
+        list2.add(20);
+        list2.add(50);
+        list2.add(60);
+        list2.add(80);
+        list2.add(10);
+        list2.add(100);
+        list2.add(90);
+        list2.add(40);
+
+        Node ultimo = this.trailer.prev;
+        Node primeiroList2 = list2.header.next;
+
+        ultimo.next = primeiroList2;
+        primeiroList2.prev = ultimo;
+
+        this.trailer.prev = list2.trailer.prev;
+        list2.trailer.prev.next = this.trailer;
+
+        this.count += list2.count;
     }
 }
