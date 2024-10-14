@@ -1,4 +1,4 @@
-public class Aplicacao {
+public class App {
     public static void main(String[] args) {
 
         DoubleLinkedListOfInteger dlist = new DoubleLinkedListOfInteger();
@@ -7,6 +7,6 @@ public class Aplicacao {
 
         dlist.staticToDynamic(Lista);
 
-        //System.out.println(Lista);
+        System.out.println(Lista);
     }
 }
