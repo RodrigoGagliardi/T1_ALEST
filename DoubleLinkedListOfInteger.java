@@ -94,6 +94,7 @@ public class DoubleLinkedListOfInteger {
         }
         count++;
     }
+
     public void printFinalSequence() {
         int[] sequence = {60, 10, 70, 20, 40, 80, 100, 50, 90, 30};
         for (int value : sequence) {
@@ -101,7 +102,16 @@ public class DoubleLinkedListOfInteger {
         }
         System.out.println();
     }
-
+    /**
+     * MÉTODO 3: mergeLists
+     *
+     * Mescla a lista fornecida como parâmetro ao final da lista atual, unindo os elementos das duas listas.
+     * Após a execução, a lista atual conterá todos os elementos de ambas as listas na ordem original.
+     * Combinar dois conjuntos de dados sequenciais em uma única sequência contínua.
+     *
+     * @param list2 a lista do tipo DoubleLinkedListOfInteger que será mesclada à lista atual
+     * @return void
+     */
     public void mergeList(DoubleLinkedListOfInteger list2) {
 
         list2.add(70);
@@ -126,4 +136,40 @@ public class DoubleLinkedListOfInteger {
 
         this.count += list2.count;
     }
+    /**
+     * MÉTODO 5: removeRange
+     *
+     * Remove os elementos da lista desde a posição start (inclusiva) até a posição stop (exclusiva).
+     * Os elementos entre essas posições serão removidos da lista atual. Remover um subconjunto de elementos da lista com base em suas posições.
+     *
+     * @param start posição inicial (inclusiva) da remoção
+     * @param stop posição final (exclusiva) da remoção
+     * @return void
+     */
+    public void removeRange(int start, int stop) {
+        if (start >= stop || start < 0 || stop > count) {
+            return;
+        }
+
+        Node current = header.next;
+        int index = 0;
+
+        while (current != trailer && index < start) {
+            current = current.next;
+            index++;
+        }
+
+        Node startNode = current;
+
+        while (current != trailer && index < stop) {
+            current = current.next;
+            index++;
+        }
+
+        startNode.prev.next = current;
+        current.prev = startNode.prev;
+        count -= (stop - start);
+    }
 }
+
+

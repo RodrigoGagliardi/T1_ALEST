@@ -5,10 +5,20 @@ public class App {
         DoubleLinkedListOfInteger list2 = new DoubleLinkedListOfInteger();
 
         DoubleLinkedListOfInteger dynamicList = new DoubleLinkedListOfInteger();
-        dynamicList.staticToDynamic(staticList); // Converte para lista duplamente encadeada
-        dynamicList.print(); // Deve exibir: 60 10 70 20 40 80 100 50 90 30
-        dynamicList.printFinalSequence();
+        System.out.println("A1: Alocação estática para alocação dinâmica com estruturas lineares");
+        dynamicList.staticToDynamic(staticList);
+        dynamicList.print();
+        System.out.println("-----------------------------------------");
+        System.out.println("A2: Implementação de métodos auxiliares:");
+        System.out.println("-----------------------------------------");
+        System.out.println("MÉTODO 3: mergeLists:");
         dynamicList.mergeList(list2);
         dynamicList.print();
+        System.out.println("-----------------------------------------");
+        System.out.println("MÉTODO 5: removeRange:");
+        dynamicList.removeRange(2, 5);
+        dynamicList.print();
+        System.out.println("-----------------------------------------");
+        
     }
 }
